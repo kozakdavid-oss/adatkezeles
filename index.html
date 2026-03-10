@@ -290,15 +290,9 @@
       });
 
       if (res.ok) {
-        // Edge Function hívása emailküldéshez
-        await fetch(`${SUPABASE_URL}/functions/v1/send-confirmation`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
-          },
-          body: JSON.stringify({ nev, email, cegnev: adat.cegnev, elfogadva_at: adat.elfogadva_at })
-        });
+        // Mivel van Webhook beállítva a Supabase-ben, 
+        // a levél automatikusan elindul a háttérben az INSERT után.
+        // Nincs szükség a második fetch hívásra ide!
 
         document.getElementById('formSection').style.display = 'none';
         document.getElementById('successSection').style.display = 'block';
