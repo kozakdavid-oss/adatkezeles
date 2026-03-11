@@ -74,9 +74,7 @@
     <h4>4. A kezelt adatok köre</h4>
     <ul>
       <li>Név</li>
-      <li>Anyja neve</li>
       <li>Születési hely és idő</li>
-      <li>Személyi igazolvány száma</li>
       <li>Lakcím/Székhely</li>
       <li>Adószám/Adóazonosító jel</li>
       <li>Telefonszám</li>
@@ -154,20 +152,12 @@
         <input type="text" id="nev" placeholder="pl. Kovács János" required>
       </div>
       <div class="form-group">
-        <label for="anyjaneve">Anyja neve <span>*</span></label>
-        <input type="text" id="anyjaneve" placeholder="pl. Szabó Mária" required>
-      </div>
-      <div class="form-group">
         <label for="szulhely">Születési hely <span>*</span></label>
         <input type="text" id="szulhely" placeholder="pl. Nyíregyháza" required>
       </div>
       <div class="form-group">
         <label for="szulido">Születési idő <span>*</span></label>
         <input type="date" id="szulido" required>
-      </div>
-      <div class="form-group">
-        <label for="szemelyi">Személyi igazolvány száma <span>*</span></label>
-        <input type="text" id="szemelyi" placeholder="pl. 123456AB" required>
       </div>
       <div class="form-group">
         <label for="email">E-mail cím <span>*</span></label>
@@ -241,15 +231,13 @@
 
   async function elfogad() {
     const nev      = document.getElementById('nev').value.trim();
-    const anyjaneve= document.getElementById('anyjaneve').value.trim();
     const szulhely = document.getElementById('szulhely').value.trim();
     const szulido  = document.getElementById('szulido').value.trim();
-    const szemelyi = document.getElementById('szemelyi').value.trim();
     const email    = document.getElementById('email').value.trim();
     const telefon  = document.getElementById('telefon').value.trim();
     const lakcim   = document.getElementById('lakcim').value.trim();
 
-    if (!nev || !anyjaneve || !szulhely || !szulido || !szemelyi || !email || !telefon || !lakcim) {
+    if (!nev || !szulhely || !szulido || !email || !telefon || !lakcim) {
       showMsg('error', 'Kérem töltse ki az összes kötelező mezőt!');
       return;
     }
@@ -263,10 +251,8 @@
 
     const adat = {
       nev:                nev,
-      anyjaneve:          anyjaneve,
       szuletesi_hely:     szulhely,
       szuletesi_ido:      szulido,
-      szemelyi_ig_szam:   szemelyi,
       email:              email,
       telefon:            telefon,
       cegnev:             document.getElementById('cegnev').value.trim() || null,
