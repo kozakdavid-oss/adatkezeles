@@ -229,8 +229,9 @@
   // ============================================================
   // KONFIGURÁCIÓ – ezeket töltsd ki a Supabase projekt adataival
   // ============================================================
-  const SUPABASE_URL    = 'https://gkhahwxbwdmdayzaytzi.supabase.co';       // pl. https://xyzabc.supabase.co
-  const SUPABASE_ANON_KEY = 'sb_publishable_OhjxYz9x6mMEtOgVuM9MQg_qqsmZrz6'; // Settings > API > anon public key
+  const SUPABASE_URL      = 'https://gkhahwxbwdmdayzaytzi.supabase.co';
+  const SUPABASE_ANON_KEY = 'sb_publishable_OhjxYz9x6mMEtOgVuM9MQg_qqsmZrz6';
+  const SUPABASE_FUNC_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdraGFod3hid2RtZGF5emF5dHppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMzE5NTgsImV4cCI6MjA4ODcwNzk1OH0.Cmng39afH9wf9Gs3SKJmCzg0JDnThBYf289xb83LzxE';
   const TAJÉKOZTATÓ_VERZIO = '2025/1';
   // ============================================================
 
@@ -296,7 +297,7 @@
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+            'Authorization': `Bearer ${SUPABASE_FUNC_KEY}`
           },
           body: JSON.stringify({ nev, email, cegnev: adat.cegnev, elfogadva_at: adat.elfogadva_at })
         });
