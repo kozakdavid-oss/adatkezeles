@@ -211,10 +211,14 @@
   <div class="already-done" id="successSection">
     <div class="icon">✅</div>
     <p><strong>Köszönjük!</strong><br>Nyilatkozata sikeresen rögzítve lett.<br>Hamarosan visszaigazoló emailt kap.</p>
+    <button id="btnPdf" onclick="letoltPdf()" style="margin-top:20px;padding:12px 28px;background:#2d5a1b;color:white;border:none;border-radius:6px;font-size:0.95rem;font-weight:600;cursor:pointer;">
+      ⬇ Nyilatkozat letöltése (PDF)
+    </button>
   </div>
 
 </div>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 <script>
   // ============================================================
   // KONFIGURÁCIÓ – ezeket töltsd ki a Supabase projekt adataival
@@ -224,6 +228,8 @@
   const SUPABASE_FUNC_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdraGFod3hid2RtZGF5emF5dHppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMzE5NTgsImV4cCI6MjA4ODcwNzk1OH0.Cmng39afH9wf9Gs3SKJmCzg0JDnThBYf289xb83LzxE';
   const TAJÉKOZTATÓ_VERZIO = '2025/1';
   // ============================================================
+
+  let _elfogadasAdat = {};
 
   document.getElementById('elfogad').addEventListener('change', function() {
     document.getElementById('btnSubmit').disabled = !this.checked;
@@ -278,6 +284,10 @@
       });
 
       if (res.ok) {
+        _elfogadasAdat = { nev, email, szulhely, szulido, telefon, lakcim,
+          cegnev: adat.cegnev, adoszam: adat.adoszam, szerepkor: adat.szerepkor,
+          elfogadva_at: adat.elfogadva_at };
+
         // Edge Function hívása emailküldéshez
         await fetch(`${SUPABASE_URL}/functions/v1/send-confirmation`, {
           method: 'POST',
@@ -302,6 +312,118 @@
       document.getElementById('btnSubmit').disabled = false;
     }
     document.getElementById('loader').style.display = 'none';
+  }
+
+  function letoltPdf() {
+    const { jsPDF } = window.jspdf;
+    const doc = new jsPDF({ unit: 'mm', format: 'a4' });
+    const datum = new Date(_elfogadasAdat.elfogadva_at).toLocaleString('hu-HU', { timeZone: 'Europe/Budapest' });
+    const oldal = 210;
+    const margó = 20;
+    const szélesség = oldal - margó * 2;
+
+    // Fejléc
+    doc.setFillColor(45, 90, 27);
+    doc.rect(0, 0, 210, 22, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(13);
+    doc.setFont('helvetica', 'bold');
+    doc.text('Kozák Dávid – Mezőgazdasági Szaktanácsadó', 105, 10, { align: 'center' });
+    doc.setFontSize(9);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Adatkezelési Tájékoztató – Elfogadási Nyilatkozat', 105, 17, { align: 'center' });
+
+    // Cím
+    doc.setTextColor(0, 0, 0);
+    doc.setFontSize(14);
+    doc.setFont('helvetica', 'bold');
+    doc.text('NYILATKOZAT', 105, 35, { align: 'center' });
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Adatkezelési Tájékoztató elfogadásáról', 105, 42, { align: 'center' });
+
+    // Elválasztó
+    doc.setDrawColor(45, 90, 27);
+    doc.setLineWidth(0.5);
+    doc.line(margó, 46, 190, 46);
+
+    // Nyilatkozat szövege
+    let y = 54;
+    doc.setFontSize(10);
+    doc.setFont('helvetica', 'normal');
+    const szoveg = `Alulírott kijelentem, hogy a Kozák Dávid mezőgazdasági szaktanácsadó által készített Adatkezelési Tájékoztatót (verzió: 2025/1) elolvastam, megértettem, és az abban foglaltakat elfogadom. Hozzájárulok, hogy az adatkezelő személyes adataimat a tájékoztatóban meghatározott célokból és módon kezelje.`;
+    const sorок = doc.splitTextToSize(szoveg, szélesség);
+    doc.text(sorок, margó, y);
+    y += sorок.length * 6 + 8;
+
+    // Adatok táblázat
+    doc.setFillColor(240, 245, 236);
+    doc.rect(margó, y - 4, szélesség, 8, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(10);
+    doc.text('Nyilatkozatot tevő adatai:', margó + 2, y + 1);
+    y += 10;
+
+    const adatok = [
+      ['Név:', _elfogadasAdat.nev],
+      ['Születési hely, idő:', `${_elfogadasAdat.szulhely}, ${_elfogadasAdat.szulido}`],
+      ['Lakcím / Székhely:', _elfogadasAdat.lakcim],
+      ['E-mail cím:', _elfogadasAdat.email],
+      ['Telefonszám:', _elfogadasAdat.telefon],
+    ];
+    if (_elfogadasAdat.cegnev) adatok.push(['Cég / Gazdaság:', _elfogadasAdat.cegnev]);
+    if (_elfogadasAdat.adoszam) adatok.push(['Adószám:', _elfogadasAdat.adoszam]);
+    if (_elfogadasAdat.szerepkor) adatok.push(['Szerepkör:', _elfogadasAdat.szerepkor]);
+
+    doc.setFont('helvetica', 'normal');
+    adatok.forEach(([cimke, ertek]) => {
+      doc.setFont('helvetica', 'bold');
+      doc.text(cimke, margó + 2, y);
+      doc.setFont('helvetica', 'normal');
+      doc.text(ertek || '–', margó + 55, y);
+      y += 7;
+    });
+
+    y += 4;
+    doc.setDrawColor(45, 90, 27);
+    doc.line(margó, y, 190, y);
+    y += 8;
+
+    // Rögzítési adatok
+    doc.setFillColor(240, 245, 236);
+    doc.rect(margó, y - 4, szélesség, 8, 'F');
+    doc.setFont('helvetica', 'bold');
+    doc.text('Elektronikus rögzítés adatai:', margó + 2, y + 1);
+    y += 10;
+
+    doc.setFont('helvetica', 'normal');
+    doc.text('Elfogadás időpontja:', margó + 2, y);
+    doc.text(datum + ' (Budapest)', margó + 55, y);
+    y += 7;
+    doc.text('Tájékoztató verziója:', margó + 2, y);
+    doc.text('2025/1', margó + 55, y);
+    y += 7;
+    doc.text('Elfogadás módja:', margó + 2, y);
+    doc.text('Online, elektronikus nyilatkozat', margó + 55, y);
+
+    y += 16;
+    doc.setFont('helvetica', 'italic');
+    doc.setFontSize(8);
+    doc.setTextColor(100, 100, 100);
+    const megjegyzes = 'Jelen elektronikus nyilatkozat az adatkezelési tájékoztató elfogadásának bizonyítékaként szolgál. Az elfogadás időbélyeggel és IP-cím rögzítésével dokumentálásra került.';
+    const mSorok = doc.splitTextToSize(megjegyzes, szélesség);
+    doc.text(mSorok, margó, y);
+
+    // Lábléc
+    doc.setFillColor(45, 90, 27);
+    doc.rect(0, 280, 210, 17, 'F');
+    doc.setTextColor(255, 255, 255);
+    doc.setFontSize(8);
+    doc.setFont('helvetica', 'normal');
+    doc.text('Kozák Dávid | 4400 Nyíregyháza, Ív utca 114. | kozakdavid@agrartanacsadas.com', 105, 288, { align: 'center' });
+    doc.text('Adószám: 55911742-2-35', 105, 293, { align: 'center' });
+
+    doc.save(`Adatkezelesi_nyilatkozat_${_elfogadasAdat.nev.replace(/ /g, '_')}.pdf`);
   }
 
   function showMsg(type, text) {
