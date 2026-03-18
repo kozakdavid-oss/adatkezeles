@@ -19,30 +19,75 @@
     .doc-box ul { margin: 6px 0 10px 22px; font-size: 0.88rem; }
     .doc-box ul li { margin-bottom: 4px; }
     .doc-box .meta { font-size: 0.82rem; color: #666; border-top: 1px solid #eee; padding-top: 12px; margin-top: 20px; }
+    
     .form-box { background: white; border: 1px solid #dce3d4; border-radius: 8px; padding: 32px 40px; }
     .form-box h2 { font-size: 1rem; color: #1a3a0a; margin-bottom: 20px; padding-bottom: 12px; border-bottom: 2px solid #2d5a1b; }
     .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
     .form-group { display: flex; flex-direction: column; gap: 5px; }
     .form-group.full { grid-column: 1 / -1; }
+    
     label { font-size: 0.82rem; font-weight: 600; color: #444; }
     label span { color: #c0392b; }
     input, select { padding: 9px 12px; border: 1px solid #ccc; border-radius: 5px; font-size: 0.88rem; width: 100%; transition: border 0.2s; }
     input:focus, select:focus { outline: none; border-color: #2d5a1b; box-shadow: 0 0 0 2px rgba(45,90,27,0.12); }
+    
+    /* Warning box – USA adattovábbítás */
+    .warning-box {
+      background: #fff9e6;
+      border: 1px solid #ffd700;
+      border-left: 4px solid #d4a800;
+      border-radius: 6px;
+      padding: 14px 16px;
+      margin: 20px 0;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .warning-box strong { color: #8b6914; }
+    
+    /* Consent boxes */
     .consent-box { background: #f0f5ec; border: 1px solid #b5d49a; border-radius: 6px; padding: 14px 16px; margin: 20px 0 6px; }
     .consent-row { display: flex; gap: 10px; align-items: flex-start; }
     .consent-row input[type="checkbox"] { width: 17px; height: 17px; margin-top: 2px; flex-shrink: 0; cursor: pointer; accent-color: #2d5a1b; }
     .consent-row label { font-size: 0.85rem; font-weight: 400; cursor: pointer; line-height: 1.5; }
+    
+    /* Cookie consent subsection */
+    .cookie-consent-section {
+      background: #f7f7f7;
+      border: 1px solid #e0e0e0;
+      border-radius: 6px;
+      padding: 12px 14px;
+      margin: 14px 0;
+      font-size: 0.82rem;
+    }
+    .cookie-consent-section h5 {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: #333;
+      margin-bottom: 8px;
+    }
+    
+    /* Button */
     .btn-submit { width: 100%; margin-top: 22px; padding: 13px; background: #2d5a1b; color: white; border: none; border-radius: 6px; font-size: 0.95rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
-    .btn-submit:hover { background: #3d7a25; }
+    .btn-submit:hover:not(:disabled) { background: #3d7a25; }
     .btn-submit:disabled { background: #aaa; cursor: not-allowed; }
+    
+    /* Messages */
     .msg { display: none; padding: 14px 18px; border-radius: 6px; margin-top: 18px; font-size: 0.88rem; }
     .msg.success { background: #e8f5e0; border: 1px solid #7bc47a; color: #1a5c1a; display: block; }
     .msg.error { background: #fde8e8; border: 1px solid #f4a0a0; color: #8b1a1a; display: block; }
+    
     .loader { display: none; text-align: center; color: #2d5a1b; font-size: 0.88rem; margin-top: 10px; }
+    
     .already-done { display: none; text-align: center; padding: 40px 20px; }
     .already-done .icon { font-size: 3rem; }
     .already-done p { font-size: 1rem; color: #2d5a1b; margin-top: 10px; }
-    @media (max-width: 600px) { .form-grid { grid-template-columns: 1fr; } .doc-box, .form-box { padding: 20px 16px; } }
+    
+    .version-info { font-size: 0.78rem; color: #999; text-align: center; margin-top: 8px; }
+    
+    @media (max-width: 600px) { 
+      .form-grid { grid-template-columns: 1fr; } 
+      .doc-box, .form-box { padding: 20px 16px; } 
+    }
   </style>
 </head>
 <body>
@@ -63,46 +108,59 @@
     <p><strong>Név:</strong> Kozák Dávid<br>
     <strong>Székhely:</strong> 4400 Nyíregyháza, Ív utca 114.<br>
     <strong>Adószám:</strong> 55911742-2-35<br>
-    <strong>E-mail:</strong> kozakdavid@agrartanacsadas.com</p>
+    <strong>E-mail:</strong> kozakdavid@agrartanacsadas.com<br>
+    <strong>Nyilvántartási szám (KAM):</strong> NAK-1963</p>
 
     <h4>2. A tájékoztató célja</h4>
-    <p>Jelen adatkezelési tájékoztató célja, hogy a mezőgazdasági szaktanácsadási szolgáltatás igénybevétele során az Ön személyes adatainak kezelésével kapcsolatos valamennyi információt megismerhesse. Az adatkezelő a rá vonatkozó, az információs önrendelkezési jogról és az információszabadságról szóló 2011. évi CXII. törvény (Infotv.) és az Európai Parlament és a Tanács (EU) 2016/679 rendelete (GDPR) alapján jár el.</p>
+    <p>Jelen adatkezelési tájékoztató célja, hogy a mezőgazdasági szaktanácsadási szolgáltatás igénybevétele során az Ön személyes adatainak kezelésével kapcsolatos valamennyi információt megismerhesse. Az adatkezelő a rá vonatkozó, az információs önrendelkezési jogról és az információszabadságról szóló 2011. évi CXII. törvény (Infotv.), az Európai Parlament és a Tanács (EU) 2016/679 rendelete (GDPR), az elektronikus aláírásról szóló 2001. évi CVIII. törvény és az elektronikus hírközlésről szóló 2003. évi C. törvény alapján jár el.</p>
 
     <h4>3. Az adatkezelés jogalapja</h4>
-    <p>Az adatkezelés jogalapja az Ön önkéntes, megfelelő tájékoztatáson alapuló hozzájárulása (GDPR 6. cikk (1) bekezdés a) pont), valamint a szerződés teljesítése (GDPR 6. cikk (1) bekezdés b) pont).</p>
+    <p>Az adatkezelés az alábbi jogalapok szerint történik:</p>
+    <ul>
+      <li><strong>a) Szerződés teljesítése (GDPR 6. cikk (1) b) pont):</strong> a mezőgazdasági szaktanácsadási szerződés teljesítése, számlázás, fizetéskezelés</li>
+      <li><strong>b) Jogi kötelezettség (GDPR 6. cikk (1) c) pont):</strong> könyvelés, adóbevallás, KAP-támogatási dokumentáció (2000. évi C. törvény, Áfa tv., KAP jogszabályok)</li>
+      <li><strong>c) Az érintett hozzájárulása (GDPR 6. cikk (1) a) pont):</strong> jelen elektronikus nyilatkozat kitöltésével az érintett explicit hozzájárulást ad az adatkezeléshez</li>
+    </ul>
 
     <h4>4. A kezelt adatok köre</h4>
     <ul>
-      <li>Név</li>
-      <li>Születési hely és idő</li>
-      <li>Lakcím/Székhely</li>
-      <li>Adószám/Adóazonosító jel</li>
-      <li>Telefonszám</li>
-      <li>E-mail cím</li>
-      <li>Gazdálkodással kapcsolatos alapadatok (földterület nagysága, művelési ágak, állatállomány adatai)</li>
-      <li>A tanácsadáshoz szükséges egyéb speciális adatok (termelési adatok, gazdasági mutatók)</li>
+      <li>Név, születési hely és idő, személyes azonosító</li>
+      <li>Lakcím/Székhely, telefonszám, e-mail cím</li>
+      <li>Adószám, adóazonosító jel, bankszámla adatok (számlázáshoz)</li>
+      <li>Gazdálkodással kapcsolatos alapadatok (földterület nagysága, művelési ágak, állatállomány, termelési módszer)</li>
+      <li>Tanácsadáshoz szükséges speciális adatok (termelési adatok, gazdasági mutatók, talajanalízis, növényvédelmi napló)</li>
+      <li>Elektronikus nyilatkozatból gyűjtött adatok (IP-cím, időbélyeg, böngésző-agencs)</li>
     </ul>
 
     <h4>5. Az adatkezelés célja</h4>
     <ul>
       <li>A mezőgazdasági szaktanácsadási szerződés teljesítése</li>
       <li>Kapcsolattartás a szolgáltatás nyújtása során</li>
-      <li>Jogszabályi kötelezettségek teljesítése (számlázás, könyvelés)</li>
-      <li>Szakmai tanácsadás nyújtása, egyedi ajánlatok készítése</li>
-      <li>Támogatási kérelmek, pályázatok előkészítése, beadása</li>
+      <li>Jogszabályi kötelezettségek teljesítése (számlázás, könyvelés, adóbevallás, KAP dokumentáció)</li>
+      <li>Szakmai tanácsadás nyújtása, támogatási pályázatok előkészítése és beadása</li>
     </ul>
 
     <h4>6. Az adatkezelés időtartama</h4>
     <ul>
-      <li>Számviteli bizonylatok: 8 évig (2000. évi C. törvény alapján)</li>
-      <li>Egyéb szerződéses dokumentumok: a szerződés megszűnésétől számított 5 évig</li>
-      <li>Támogatási dokumentumok: általában a támogatási időszak lezárását követő 10 évig</li>
+      <li>Számviteli bizonylatok: 8 év (2000. évi C. törvény)</li>
+      <li>Szerződéses dokumentumok: a szerződés véglegesen való megszűnésétől számított 5 év</li>
+      <li>KAP-támogatási dokumentumok: a támogatási időszak lezárásától számított 10 év</li>
+      <li>Elektronikus nyilatkozat adatai: 3 év (biztonsági auditálás és jogi viták céljából)</li>
     </ul>
 
     <h4>7. Adattovábbítás</h4>
-    <p>Az adatkezelő az Ön adatait kizárólag jogszabályi kötelezettség teljesítése céljából, az Ön előzetes és kifejezett hozzájárulásával, vagy adatfeldolgozók részére (könyvelő, IT szolgáltató) továbbítja.</p>
+    <p>Az adatkezelő az Ön adatait kizárólag jogszabályi kötelezettség teljesítése céljából, az Ön előzetes és kifejezett hozzájárulásával, vagy az alábbi adatfeldolgozók részére továbbítja:</p>
+    <ul>
+      <li>Könyvelő / könyvelési cég (számviteli nyilvántartás)</li>
+      <li>IT-szolgáltató (szerver üzemeltetés, biztonsági mentések)</li>
+      <li>NAV, KSH, MÁK, NÉBIH (jogszabályi kötelezettség)</li>
+      <li>Supabase (Supabase Inc., USA) – adatbázis-kezelés, nyilatkozatok tárolása, EU régióban az AWS szerverei</li>
+      <li>Resend (Resend Inc., USA) – e-mail küldés (nyilatkozat-visszaigazolás, PDF generálás)</li>
+      <li>GitHub (GitHub Inc., Microsoft, USA) – statikus webhely (GitHub Pages) hosztálása</li>
+    </ul>
+    <p>Az USA-s adatfeldolgozók esetén az adatkezelő az Európai Unió Standard Contractual Clauses (SCC) szerződéseit alkalmazta a GDPR 46. cikke alapján. Az adattovábbítás során az adatkezelő az alábbi kiegészítő intézkedéseket alkalmazza: adatminimalizáció (csak szükséges adatok továbbítása), HTTPS/TLS titkosítás az adattovábbítás során, az érintett GDPR szerinti jogainak biztosítása (tájékoztatás, hozzáférés, törlés kérelmezése), és az elektronikus nyilatkozat azonosító adatainak (IP-cím, időbélyeg) korlátozása a szükséges szintre.</p>
 
-    <h4>8. Az érintettek jogai</h4>
+    <h4>8. Az érintett jogai</h4>
     <p>Ön mint érintett jogosult:</p>
     <ul>
       <li>Tájékoztatást kérni személyes adatai kezeléséről</li>
@@ -112,39 +170,59 @@
       <li>Személyes adatai kezelésének korlátozását kérni</li>
       <li>Tiltakozni személyes adatai kezelése ellen</li>
       <li>Adathordozhatósághoz való jogát gyakorolni</li>
-      <li>Hozzájárulását bármikor visszavonni (ez nem érinti a visszavonás előtt történt adatkezelés jogszerűségét)</li>
+      <li>Hozzájárulását bármikor visszavonni</li>
     </ul>
-    <p>Kérelme esetén az adatkezelő 30 napon belül válaszol.</p>
+    <p>Kérelme esetén az adatkezelő 30 napon belül válaszol: <strong>kozakdavid@agrartanacsadas.com</strong></p>
 
     <h4>9. Jogorvoslati lehetőségek</h4>
-    <p>Amennyiben úgy ítéli meg, hogy személyes adatainak kezelésével kapcsolatban jogsérelem érte, vagy annak közvetlen veszélye fennáll, kérjük, első körben forduljon az adatkezelőhöz a fent megadott elérhetőségeken.</p>
-    <p>Jogainak megsértése esetén a Nemzeti Adatvédelmi és Információszabadság Hatósághoz fordulhat:</p>
+    <p>Jogsérelem esetén első körben forduljon az adatkezelőhöz. A Nemzeti Adatvédelmi és Információszabadság Hatóság (NAIH) elérhetősége:</p>
     <ul>
-      <li><strong>Székhely:</strong> 1055 Budapest, Falk Miksa utca 9-11.</li>
-      <li><strong>Postacím:</strong> 1363 Budapest, Pf. 9.</li>
+      <li><strong>Cím:</strong> 1055 Budapest, Falk Miksa utca 9-11.</li>
       <li><strong>Telefon:</strong> +36 1 391 1400</li>
       <li><strong>E-mail:</strong> ugyfelszolgalat@naih.hu</li>
       <li><strong>Weboldal:</strong> www.naih.hu</li>
     </ul>
-    <p>Jogainak megsértése esetén bírósághoz is fordulhat. A per elbírálása a törvényszék hatáskörébe tartozik. A per – az Ön választása szerint – az Ön lakóhelye vagy tartózkodási helye szerinti törvényszék előtt is megindítható.</p>
+    <p>Bírósághoz is fordulhat az Ön lakóhelye szerinti törvényszék előtt.</p>
 
     <h4>10. Adatbiztonság</h4>
-    <p>Az adatkezelő kötelezettséget vállal arra, hogy megfelelő technikai és szervezési intézkedéseket hajt végre annak érdekében, hogy a megfelelő szintű adatbiztonságot garantálja. Ennek megfelelően az adatkezelő biztosítja a személyes adatok bizalmasságát (titokban tartását), sértetlenségét és rendelkezésre állását.</p>
+    <p>Az adatkezelő megfelelő technikai és szervezési intézkedéseket hajt végre:</p>
+    <ul>
+      <li>HTTPS/TLS titkosítás az internetes adattovábbítás során</li>
+      <li>Jelszóvédelem, kétfaktoros hitelesítés (2FA) az adminisztratív felületeken</li>
+      <li>Napi/heti biztonsági mentések (titkosítva)</li>
+      <li>Hozzáférés-korlátozás és auditálás (csak szükséges ismeretek alapján)</li>
+      <li>Rendszeres biztonsági frissítések és éves extern auditálás</li>
+      <li>Adatvédelmi oktatás a személyzet számára</li>
+      <li>72 órás incidensjelentés a NAIH-nak (ha szükséges)</li>
+    </ul>
 
-    <h4>11. A tájékoztató módosítása</h4>
-    <p>Az adatkezelő fenntartja a jogot, hogy jelen adatkezelési tájékoztatót egyoldalúan módosítsa. A módosításról az adatkezelő az érintetteket előzetesen e-mailben vagy postai úton értesíti.</p>
+    <h4>11. Sütik és Web Tracking</h4>
+    <p>Az online nyilatkozat rendszer az alábbi sütit alkalmaz:</p>
+    <ul>
+      <li><strong>Szükséges sütik:</strong> session_id, csrf_token (nyilatkozat működéséhez)</li>
+      <li><strong>Elemzésre szolgáló sütik (opcionális):</strong> Google Analytics, saját analitikai sütik (az érintett explicit hozzájárulásával)</li>
+      <li><strong>Harmadik fél sütik:</strong> GitHub, Supabase, Resend (USA-s szolgáltatók)</li>
+    </ul>
+    <p>Az érintett a böngésző beállításaiban kezelheti a sütik preferenciáit, vagy papír alapú nyilatkozatot kérhet.</p>
 
-    <h4>12. Záró rendelkezések</h4>
-    <p>Jelen adatkezelési tájékoztató a mezőgazdasági szaktanácsadási szerződés elválaszthatatlan részét képezi. A szerződés aláírásával Ön elismeri, hogy jelen adatkezelési tájékoztatót megismerte és az abban foglaltakat elfogadja.</p>
-    <p><strong>Adatkezelő:</strong> Kozák Dávid, Mezőgazdasági szaktanácsadó</p>
+    <h4>12. Elektronikus aláírás jogi státusza</h4>
+    <p>Az elektronikus nyilatkozat az elektronikus aláírásról szóló 2001. évi CVIII. törvény szerinti <strong>egyszerű elektronikus aláírás</strong>, amely az IP-cím + időbélyeg + user-agent rögzítésével azonosított. Ez a polgári perben bizonyítékként használható. Az érintett erős vagy minősített elektronikus aláírást követelhet az adatkezelőtől.</p>
 
-    <div class="meta">Tájékoztató verziója: 2025/1 &nbsp;|&nbsp; Hatályos: 2025. január 1-től</div>
+    <h4>13. A tájékoztató módosítása</h4>
+    <p>Az adatkezelő az érintetteket legalább 30 nappal előre értesíti a módosításokról e-mailben vagy postai úton.</p>
+
+    <h4>14. Papír alapú nyilatkozat</h4>
+    <p>Az érintett papír alapú vagy e-mail útján is nyújthatja be nyilatkozatát, amennyiben elkerülni szeretné az elektronikus rendszert vagy az USA-ba történő adattovábbítást. Kérje a formanyomtatványt: <strong>kozakdavid@agrartanacsadas.com</strong></p>
+
+    <div class="meta">Tájékoztató verziója: <strong>2025/2</strong> (GDPR Teljes Megfelelés) &nbsp;|&nbsp; Hatályos: 2025. január 1-től &nbsp;|&nbsp; Utolsó módosítás: 2026. március 18.</div>
   </div>
 
   <!-- ELFOGADÓ ŰRLAP -->
   <div class="form-box" id="formSection">
     <h2>Nyilatkozat – Tájékoztató elfogadása</h2>
-    <p style="font-size:0.85rem;color:#555;margin-bottom:20px;">Az alábbi adatok megadásával és az „Elfogadom" gombra kattintással Ön elektronikusan aláírja és elfogadja a fenti adatkezelési tájékoztatót. Az elfogadás időbélyeggel és IP-címmel kerül rögzítésre.</p>
+    <p style="font-size:0.85rem;color:#555;margin-bottom:20px;">Az alábbi adatok megadásával és az „Elfogadom" gombra kattintással Ön elektronikusan aláírja és elfogadja a fenti adatkezelési tájékoztatót.</p>
+
+
 
     <div class="form-grid">
       <div class="form-group">
@@ -186,16 +264,58 @@
           <option value="egyéni gazdálkodó">Egyéni gazdálkodó</option>
           <option value="őstermelő">Őstermelő</option>
           <option value="jogi személy képviselője">Jogi személy képviselője (Kft., Bt., Zrt.)</option>
+          <option value="tanácsadó">Tanácsadó / Képviselő</option>
           <option value="egyéb">Egyéb</option>
         </select>
       </div>
     </div>
 
+    <!-- GDPR és Adatkezelési Nyilatkozat -->
     <div class="consent-box">
       <div class="consent-row">
         <input type="checkbox" id="elfogad">
         <label for="elfogad">
-          Kijelentem, hogy a fenti <strong>Adatkezelési Tájékoztatót</strong> elolvastam, megértettem, és az abban foglaltakat <strong>elfogadom</strong>. Hozzájárulok, hogy az adatkezelő személyes adataimat a tájékoztatóban meghatározott célokból és módon kezelje. Tudomásul veszem, hogy jelen elektronikus nyilatkozatom aláírásnak minősül, és időbélyeggel, IP-cím rögzítésével kerül dokumentálásra.
+          <strong>Az Adatkezelési Tájékoztató elfogadása:</strong><br>
+          Kijelentem, hogy a fenti <strong>Adatkezelési Tájékoztatót (verzió 2025/2)</strong> teljes egészében elolvastam, megértettem, és az abban foglaltakat <strong>elfogadom</strong>. Hozzájárulok, hogy az adatkezelő személyes adataimat a tájékoztatóban meghatározott célokból és módon kezelje, beleértve az USA-s adatfeldolgozók általi feldolgozást (GDPR 6. cikk (1) a) pont). Tudomásul veszem, hogy jelen elektronikus nyilatkozatom aláírásnak minősül az E-Sig tv. szerint, és időbélyeggel, IP-cím rögzítésével kerül dokumentálásra.
+        </label>
+      </div>
+    </div>
+
+    <!-- Sütik Hozzájárulása -->
+    <div class="cookie-consent-section">
+      <h5>🍪 Sütik és Web Tracking Hozzájárulása</h5>
+      <div class="consent-row">
+        <input type="checkbox" id="cookieNecessary" checked disabled>
+        <label for="cookieNecessary">
+          <strong>Szükséges sütik:</strong> A nyilatkozat működéséhez szükséges (session, CSRF-védelmi token). Ezek automatikusan aktiválódnak.
+        </label>
+      </div>
+      <div class="consent-row" style="margin-top: 8px;">
+        <input type="checkbox" id="cookieAnalytics">
+        <label for="cookieAnalytics">
+          <strong>Elemzésre szolgáló sütik:</strong> Google Analytics és saját analitikai sütik az oldal használatának nyomon követéséhez. Opcionális – csak az Ön kifejezett hozzájárulásával aktiválódnak.
+        </label>
+      </div>
+    </div>
+
+    <!-- Elektronikus Aláírás Nyilatkozat -->
+    <div class="consent-box" style="margin-top: 12px;">
+      <div class="consent-row">
+        <input type="checkbox" id="esig" required>
+        <label for="esig">
+          <strong>Elektronikus Aláírás:</strong><br>
+          Tudomásul veszem, hogy jelen nyilatkozat <strong>egyszerű elektronikus aláírásnak</strong> minősül az elektronikus aláírásról szóló 2001. évi CVIII. törvény alapján. Az IP-cím, időbélyeg és böngésző-információ az aláírás azonosítási elemeiként kerülnek rögzítésre és dokumentálásra az adatkezelő szerverei által. Ez a polgári perben bizonyítékként használható. Az adatok feldolgozása a tájékoztatóban meghatározott célokon túl nem történik.
+        </label>
+      </div>
+    </div>
+
+    <!-- Kor és Jogképesség Nyilatkozat -->
+    <div class="consent-box" style="margin-top: 12px;">
+      <div class="consent-row">
+        <input type="checkbox" id="eletkor" required>
+        <label for="eletkor">
+          <strong>Életkor és Jogképesség:</strong><br>
+          Kijelentem, hogy legalább 16 éves vagyok (vagy az adott EU-tagállamban az információs önrendelkezés jogához szükséges korú), vagy szülői/gondnoki hozzájárulásom van.
         </label>
       </div>
     </div>
@@ -203,14 +323,19 @@
     <button class="btn-submit" id="btnSubmit" onclick="elfogad()" disabled>
       ✓ Elfogadom és nyilatkozatot küldöm
     </button>
+    
     <div class="loader" id="loader">⏳ Küldés folyamatban...</div>
     <div class="msg" id="msgBox"></div>
+    
+    <div class="version-info">
+      Tájékoztató verziója: <strong>2025/2</strong> | Elektronikus forma verziója: 2025/2 | © Kozák Dávid Mezőgazdasági Szaktanácsadó
+    </div>
   </div>
 
   <!-- SIKERES ELFOGADÁS UTÁN -->
   <div class="already-done" id="successSection">
     <div class="icon">✅</div>
-    <p><strong>Köszönjük!</strong><br>Nyilatkozata sikeresen rögzítve lett.<br>Hamarosan visszaigazoló emailt kap.</p>
+    <p><strong>Köszönjük!</strong><br>Nyilatkozata sikeresen rögzítve lett.<br>Hamarosan visszaigazoló e-mailt kap.</p>
     <button id="btnPdf" onclick="letoltPdf()" style="margin-top:20px;padding:12px 28px;background:#2d5a1b;color:white;border:none;border-radius:6px;font-size:0.95rem;font-weight:600;cursor:pointer;">
       ⬇ Nyilatkozat letöltése (PDF)
     </button>
@@ -220,19 +345,27 @@
 
 <script>
   // ============================================================
-  // KONFIGURÁCIÓ – ezeket töltsd ki a Supabase projekt adataival
+  // KONFIGURÁCIÓ
   // ============================================================
   const SUPABASE_URL      = 'https://gkhahwxbwdmdayzaytzi.supabase.co';
   const SUPABASE_ANON_KEY = 'sb_publishable_OhjxYz9x6mMEtOgVuM9MQg_qqsmZrz6';
   const SUPABASE_FUNC_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdraGFod3hid2RtZGF5emF5dHppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMzE5NTgsImV4cCI6MjA4ODcwNzk1OH0.Cmng39afH9wf9Gs3SKJmCzg0JDnThBYf289xb83LzxE';
-  const TAJÉKOZTATÓ_VERZIO = '2025/1';
+  const TAJÉKOZTATÓ_VERZIO = '2025/2';
   // ============================================================
 
   let _elfogadasAdat = {};
 
-  document.getElementById('elfogad').addEventListener('change', function() {
-    document.getElementById('btnSubmit').disabled = !this.checked;
-  });
+  // Ellenőrizze az összes kötelező checkboxot
+  function updateSubmitButton() {
+    const elfogad = document.getElementById('elfogad').checked;
+    const esig = document.getElementById('esig').checked;
+    const eletkor = document.getElementById('eletkor').checked;
+    document.getElementById('btnSubmit').disabled = !(elfogad && esig && eletkor);
+  }
+
+  document.getElementById('elfogad').addEventListener('change', updateSubmitButton);
+  document.getElementById('esig').addEventListener('change', updateSubmitButton);
+  document.getElementById('eletkor').addEventListener('change', updateSubmitButton);
 
   async function elfogad() {
     const nev      = document.getElementById('nev').value.trim();
@@ -271,6 +404,7 @@
       lakcim:             lakcim,
       adoszam:            document.getElementById('adoszam').value.trim() || null,
       szerepkor:          document.getElementById('szerepkor').value || null,
+      cookie_analytics:   document.getElementById('cookieAnalytics').checked,
       tajékoztato_verzio: TAJÉKOZTATÓ_VERZIO,
       ip_cim:             ip_cim,
       user_agent:         navigator.userAgent,
@@ -285,7 +419,7 @@
           'apikey': SUPABASE_ANON_KEY,
           'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
           'Prefer': 'return=minimal',
-          'X-Client-Info': 'adatkezeles/1.0'
+          'X-Client-Info': 'adatkezeles/2.0'
         },
         body: JSON.stringify(adat)
       });
@@ -293,7 +427,8 @@
       if (res.ok) {
         _elfogadasAdat = { nev, email, szulhely, szulido, telefon, lakcim,
           cegnev: adat.cegnev, adoszam: adat.adoszam, szerepkor: adat.szerepkor,
-          elfogadva_at: adat.elfogadva_at, ip_cim: ip_cim };
+          elfogadva_at: adat.elfogadva_at, ip_cim: ip_cim,
+          cookie_analytics: adat.cookie_analytics };
 
         // Edge Function hívása emailküldéshez
         await fetch(`${SUPABASE_URL}/functions/v1/send-confirmation`, {
@@ -337,7 +472,6 @@
 
   .oldal { width: 100%; }
 
-  /* Fejléc – normál flow, NEM negatív margin */
   .fejlec {
     background: #2d5a1b;
     color: white;
@@ -359,15 +493,14 @@
   ul { margin: 2px 0 5px 15px; padding: 0; }
   li { line-height: 1.45; margin-bottom: 1px; }
 
-  table { width: 100%; border-collapse: collapse; margin-bottom: 6px; }
+  table { width: 100%; border-collapse: collapse; margin-bottom: 6px; font-size: 8.5pt; }
   td { padding: 3px 7px; vertical-align: top; }
-  td:first-child { font-weight: bold; width: 46mm; color: #333; white-space: nowrap; }
+  td:first-child { font-weight: bold; width: 40%; color: #333; }
   tr:nth-child(even) td { background: #f7fbf4; }
 
   .megjegyzes { font-size: 8pt; color: #666; font-style: italic; margin-top: 8px;
                 line-height: 1.4; border-top: 1px solid #ddd; padding-top: 7px; }
 
-  /* Lábléc – normál flow az oldal alján */
   .labléc {
     background: #2d5a1b;
     color: white;
@@ -378,8 +511,9 @@
     border-radius: 3px;
   }
 
-  /* Oldaltörés */
   .oldaltores { page-break-before: always; }
+  
+  .warning { background: #fff9e6; border: 1px solid #ffd700; padding: 4px 6px; margin: 2px 0; font-size: 8pt; }
 </style>
 </head>
 <body>
@@ -387,86 +521,93 @@
 <!-- ===================== 1. OLDAL: TÁJÉKOZTATÓ ===================== -->
 <div class="fejlec">
   <h1>Kozák Dávid – Mezőgazdasági Szaktanácsadó</h1>
-  <p>Adatkezelési Tájékoztató – Elfogadási Nyilatkozat</p>
+  <p>Adatkezelési Tájékoztató – Elfogadási Nyilatkozat (verzió 2025/2)</p>
 </div>
 
 <h2>ADATKEZELÉSI TÁJÉKOZTATÓ</h2>
-<h3>Mezőgazdasági Szaktanácsadási Szolgáltatáshoz</h3>
+<h3>Mezőgazdasági Szaktanácsadási Szolgáltatáshoz – GDPR Teljes Megfelelés</h3>
 <hr class="elvalo">
 
 <div class="szekció">1. Az adatkezelő adatai</div>
-<p><strong>Név:</strong> Kozák Dávid &nbsp;|&nbsp; <strong>Székhely:</strong> 4400 Nyíregyháza, Ív utca 114.<br>
-<strong>Adószám:</strong> 55911742-2-35 &nbsp;|&nbsp; <strong>E-mail:</strong> kozakdavid@agrartanacsadas.com</p>
+<table>
+  <tr><td>Név</td><td>Kozák Dávid</td></tr>
+  <tr><td>Székhely</td><td>4400 Nyíregyháza, Ív utca 114.</td></tr>
+  <tr><td>Adószám</td><td>55911742-2-35</td></tr>
+  <tr><td>E-mail</td><td>kozakdavid@agrartanacsadas.com</td></tr>
+  <tr><td>KAM Nyilvántartási szám</td><td>NAK-1963</td></tr>
+</table>
 
 <div class="szekció">2. A tájékoztató célja</div>
-<p>Jelen adatkezelési tájékoztató célja, hogy a mezőgazdasági szaktanácsadási szolgáltatás igénybevétele során az Ön személyes adatainak kezelésével kapcsolatos valamennyi információt megismerhesse. Az adatkezelő a rá vonatkozó, az információs önrendelkezési jogról és az információszabadságról szóló 2011. évi CXII. törvény (Infotv.) és az Európai Parlament és a Tanács (EU) 2016/679 rendelete (GDPR) alapján jár el.</p>
+<p>Jelen tájékoztató a mezőgazdasági szaktanácsadási szolgáltatás igénybevételéhez szükséges. Az adatkezelő az Infotv. és a GDPR alapján jár el.</p>
 
 <div class="szekció">3. Az adatkezelés jogalapja</div>
-<p>Az adatkezelés jogalapja az Ön önkéntes, megfelelő tájékoztatáson alapuló hozzájárulása (GDPR 6. cikk (1) bekezdés a) pont), valamint a szerződés teljesítése (GDPR 6. cikk (1) bekezdés b) pont).</p>
+<p><strong>a) Szerződés teljesítése (GDPR 6. cikk (1) b):</strong> szaktanácsadási szerződés teljesítése, számlázás.</p>
+<p><strong>b) Jogi kötelezettség (GDPR 6. cikk (1) c):</strong> könyvelés, adóbevallás, KAP-dokumentáció (2000. évi C. törvény, Áfa tv., KAP jogszabályok).</p>
+<p><strong>c) Hozzájárulás (GDPR 6. cikk (1) a):</strong> jelen elektronikus nyilatkozat kitöltésével az érintett explicit hozzájárulást ad.</p>
 
 <div class="szekció">4. A kezelt adatok köre</div>
 <ul>
-  <li>Név</li><li>Születési hely és idő</li><li>Lakcím/Székhely</li>
-  <li>Adószám/Adóazonosító jel</li><li>Telefonszám</li><li>E-mail cím</li>
-  <li>Gazdálkodással kapcsolatos alapadatok (földterület nagysága, művelési ágak, állatállomány adatai)</li>
-  <li>A tanácsadáshoz szükséges egyéb speciális adatok (termelési adatok, gazdasági mutatók)</li>
+  <li>Név, születési hely és idő, személyes azonosító</li>
+  <li>Lakcím/Székhely, telefonszám, e-mail, adószám, bankszámla adatok</li>
+  <li>Mezőgazdasági adatok (terület, művelési ágak, állatállomány, termelési módszer)</li>
+  <li>Tanácsadási adatok (termelési/gazdasági mutatók, talajanalízis, növényvédelmi napló)</li>
+  <li>Elektronikus aláírás adatai (IP-cím, időbélyeg, user-agent)</li>
 </ul>
 
 <div class="szekció">5. Az adatkezelés célja</div>
 <ul>
-  <li>A mezőgazdasági szaktanácsadási szerződés teljesítése</li>
-  <li>Kapcsolattartás a szolgáltatás nyújtása során</li>
-  <li>Jogszabályi kötelezettségek teljesítése (számlázás, könyvelés)</li>
-  <li>Szakmai tanácsadás nyújtása, egyedi ajánlatok készítése</li>
-  <li>Támogatási kérelmek, pályázatok előkészítése, beadása</li>
+  <li>Szaktanácsadási szerződés teljesítése</li>
+  <li>Jogszabályi kötelezettségek (számlázás, könyvelés, adóbevallás, KAP-dokumentáció)</li>
+  <li>Támogatási pályázatok előkészítése</li>
+  <li>Kapcsolattartás a szolgáltatás során</li>
 </ul>
 
 <div class="szekció">6. Az adatkezelés időtartama</div>
+<table>
+  <tr><td>Számviteli bizonylatok</td><td>8 év (2000. évi C. törvény)</td></tr>
+  <tr><td>Szerződéses dokumentumok</td><td>5 év a szerződés véglegesen való megszűnésétől</td></tr>
+  <tr><td>KAP-támogatási dokumentumok</td><td>10 év a támogatási időszak lezárásától</td></tr>
+  <tr><td>Elektronikus nyilatkozat adatai</td><td>3 év (biztonsági auditálás, jogi viták)</td></tr>
+</table>
+
+<div class="szekció">7. Adattovábbítás – Adatfeldolgozók (GDPR 28. cikk)</div>
+<p><strong>Hazai adatfeldolgozók:</strong> Könyvelő, IT-szolgáltató (szerver üzemeltetés), NAV, KSH, MÁK, NÉBIH (jogszabályi kötelezettség).</p>
+<p><strong>Nemzetközi adatfeldolgozók (Standard Contractual Clauses – SCC szerződésekkel):</strong></p>
+<table>
+  <tr><td>Supabase (Supabase Inc.)</td><td>Adatbázis-kezelés, nyilatkozatok tárolása</td><td>Székhely: USA, szerver: EU régió (AWS)</td></tr>
+  <tr><td>Resend (Resend Inc.)</td><td>E-mail küldés (nyilatkozat-visszaigazolás, PDF generálás)</td><td>USA</td></tr>
+  <tr><td>GitHub (GitHub Inc., Microsoft)</td><td>Statikus webhely (GitHub Pages) hosztálása</td><td>USA</td></tr>
+</table>
+<p><strong>Az adatfeldolgozás biztonsági intézkedései:</strong> Az adatkezelő az alábbi kiegészítő intézkedéseket alkalmazza az adattovábbítás során: adatminimalizáció (csak szükséges adatok továbbítása), HTTPS/TLS 1.2+ titkosítás az adatok átvitelénél, az érintett GDPR szerinti jogainak garantálása (tájékoztatás, hozzáférés, helyesbítés, törlés kérelmezése), és az elektronikus nyilatkozat azonosító adatainak (IP-cím, időbélyeg) korlátozása a szükséges szintre. A Standard Contractual Clauses (SCC) szerződéseket az Európai Unió 46. cikkének megfelelően az adatkezelő aláírta az összes nemzetközi adatfeldolgozóval.</p>
+
+<div class="szekció">8. Az érintett jogai (GDPR 12-22. cikkek)</div>
+<p>Tájékoztatás, hozzáférés, helyesbítés, törlés, korlátozás, tiltakozás, adathordozhatóság, hozzájárulás visszavonása. Kérelem: kozakdavid@agrartanacsadas.com. Válaszadási határidő: 30 nap.</p>
+
+<div class="szekció">9. Jogorvoslat</div>
+<p><strong>NAIH:</strong> 1055 Budapest, Falk Miksa utca 9-11. | +36 1 391 1400 | ugyfelszolgalat@naih.hu | www.naih.hu</p>
+<p><strong>Bíróság:</strong> Az Ön lakóhelye szerinti törvényszék.</p>
+
+<div class="szekció">10. Adatbiztonság (GDPR 32. cikk)</div>
 <ul>
-  <li>Számviteli bizonylatok: 8 évig (2000. évi C. törvény alapján)</li>
-  <li>Egyéb szerződéses dokumentumok: a szerződés megszűnésétől számított 5 évig</li>
-  <li>Támogatási dokumentumok: általában a támogatási időszak lezárását követő 10 évig</li>
+  <li>HTTPS/TLS titkosítás az internetes adattovábbítás során</li>
+  <li>Jelszóvédelem, kétfaktoros hitelesítés (2FA) adminisztratív felületeken</li>
+  <li>Napi/heti biztonsági mentések (titkosítva)</li>
+  <li>Hozzáférés-korlátozás, auditálás (szükséges ismeretek alapján)</li>
+  <li>Rendszeres frissítések és éves extern biztonsági auditálás</li>
+  <li>Adatvédelmi oktatás, incidenskezelési terv (72 órás NAIH-értesítés)</li>
 </ul>
 
-<div class="szekció">7. Adattovábbítás</div>
-<p>Az adatkezelő az Ön adatait kizárólag jogszabályi kötelezettség teljesítése céljából, az Ön előzetes és kifejezett hozzájárulásával, vagy adatfeldolgozók részére (könyvelő, IT szolgáltató) továbbítja.</p>
+<div class="szekció">11. Sütik és Web Tracking (eHSZK / LSAP irányelv)</div>
+<p><strong>Szükséges sütik:</strong> session_id, csrf_token (automatikus aktiválás).</p>
+<p><strong>Elemzésre szolgáló sütik:</strong> Google Analytics, saját analitikai sütik (explicit hozzájárulásra vár).</p>
+<p><strong>Harmadik fél sütik:</strong> GitHub, Supabase, Resend (USA-s szolgáltatók).</p>
+<p>Az érintett a böngésző beállításaiban vagy papír alapú nyilatkozattal kezelheti a sütik preferenciáit.</p>
 
-<div class="szekció">8. Az érintettek jogai</div>
-<p>Ön mint érintett jogosult:</p>
-<ul>
-  <li>Tájékoztatást kérni személyes adatai kezeléséről</li>
-  <li>Személyes adataihoz hozzáférést kérni</li>
-  <li>Személyes adatai helyesbítését kérni</li>
-  <li>Személyes adatai törlését kérni (a jogszabályi kötelezettségek keretein belül)</li>
-  <li>Személyes adatai kezelésének korlátozását kérni</li>
-  <li>Tiltakozni személyes adatai kezelése ellen</li>
-  <li>Adathordozhatósághoz való jogát gyakorolni</li>
-  <li>Hozzájárulását bármikor visszavonni (ez nem érinti a visszavonás előtt történt adatkezelés jogszerűségét)</li>
-</ul>
-<p>Kérelme esetén az adatkezelő 30 napon belül válaszol.</p>
+<div class="szekció">12. Elektronikus aláírás jogi státusza (E-Sig tv. 2001. évi CVIII. törvény)</div>
+<p>Az elektronikus nyilatkozat <strong>egyszerű elektronikus aláírásnak</strong> minősül, amely az IP-cím + időbélyeg + user-agent rögzítésével azonosított. Ez a polgári perben bizonyítékként használható. Az érintett erős vagy minősített elektronikus aláírást követelhet az adatkezelőtől.</p>
 
-<div class="szekció">9. Jogorvoslati lehetőségek</div>
-<p>Amennyiben úgy ítéli meg, hogy személyes adatainak kezelésével kapcsolatban jogsérelem érte, vagy annak közvetlen veszélye fennáll, kérjük, első körben forduljon az adatkezelőhöz a fent megadott elérhetőségeken.</p>
-<p>Jogainak megsértése esetén a Nemzeti Adatvédelmi és Információszabadság Hatósághoz fordulhat:</p>
-<ul>
-  <li>Székhely: 1055 Budapest, Falk Miksa utca 9-11.</li>
-  <li>Postacím: 1363 Budapest, Pf. 9.</li>
-  <li>Telefon: +36 1 391 1400</li>
-  <li>E-mail: ugyfelszolgalat@naih.hu</li>
-  <li>Weboldal: www.naih.hu</li>
-</ul>
-<p>Jogainak megsértése esetén bírósághoz is fordulhat. A per elbírálása a törvényszék hatáskörébe tartozik. A per – az Ön választása szerint – az Ön lakóhelye vagy tartózkodási helye szerinti törvényszék előtt is megindítható.</p>
-
-<div class="szekció">10. Adatbiztonság</div>
-<p>Az adatkezelő kötelezettséget vállal arra, hogy megfelelő technikai és szervezési intézkedéseket hajt végre annak érdekében, hogy a megfelelő szintű adatbiztonságot garantálja. Ennek megfelelően az adatkezelő biztosítja a személyes adatok bizalmasságát (titokban tartását), sértetlenségét és rendelkezésre állását.</p>
-
-<div class="szekció">11. A tájékoztató módosítása</div>
-<p>Az adatkezelő fenntartja a jogot, hogy jelen adatkezelési tájékoztatót egyoldalúan módosítsa. A módosításról az adatkezelő az érintetteket előzetesen e-mailben vagy postai úton értesíti.</p>
-
-<div class="szekció">12. Záró rendelkezések</div>
-<p>Jelen adatkezelési tájékoztató a mezőgazdasági szaktanácsadási szerződés elválaszthatatlan részét képezi. A szerződés aláírásával Ön elismeri, hogy jelen adatkezelési tájékoztatót megismerte és az abban foglaltakat elfogadja.</p>
-<p><strong>Adatkezelő:</strong> Kozák Dávid, Mezőgazdasági szaktanácsadó</p>
-<p><em>Tájékoztató verziója: 2025/1 &nbsp;|&nbsp; Hatályos: 2025. január 1-től</em></p>
+<div class="szekció">13. Papír alapú nyilatkozat alternatívája</div>
+<p>Az érintett papír alapú vagy e-mail útján is nyújthatja be nyilatkozatát az USA-ba történő adattovábbítás elkerülése érdekében. Kérje a formanyomtatványt: kozakdavid@agrartanacsadas.com</p>
 
 <div class="labléc">
   Kozák Dávid &nbsp;|&nbsp; 4400 Nyíregyháza, Ív utca 114. &nbsp;|&nbsp; kozakdavid@agrartanacsadas.com &nbsp;|&nbsp; Adószám: 55911742-2-35
@@ -477,39 +618,54 @@
 
 <div class="fejlec">
   <h1>Kozák Dávid – Mezőgazdasági Szaktanácsadó</h1>
-  <p>Elfogadási Nyilatkozat</p>
+  <p>Elektronikus Elfogadási Nyilatkozat</p>
 </div>
 
 <h2>NYILATKOZAT</h2>
-<h3>Adatkezelési Tájékoztató elfogadásáról</h3>
+<h3>Adatkezelési Tájékoztató Elfogadásáról (verzió 2025/2)</h3>
 <hr class="elvalo">
 
-<p>Alulírott kijelentem, hogy a Kozák Dávid mezőgazdasági szaktanácsadó által készített <strong>Adatkezelési Tájékoztatót (verzió: 2025/1)</strong> elolvastam, megértettem, és az abban foglaltakat <strong>elfogadom</strong>. Hozzájárulok, hogy az adatkezelő személyes adataimat a tájékoztatóban meghatározott célokból és módon kezelje. Tudomásul veszem, hogy jelen elektronikus nyilatkozatom aláírásnak minősül, és időbélyeggel, IP-cím rögzítésével kerül dokumentálásra.</p>
+<p><strong>Alulírott kijelentem:</strong></p>
+<ul>
+  <li>A Kozák Dávid által készített Adatkezelési Tájékoztatót (2025/2) teljes egészében elolvastam, megértettem, és <strong>elfogadom</strong>;</li>
+  <li>Hozzájárulok az adatkezelőnek személyes adataimat a tájékoztatóban meghatározott célokból és módon kezelje, beleértve az USA-s adatfeldolgozók (Supabase, Resend, GitHub) általi feldolgozást;</li>
+  <li>Tudomásul veszem, hogy az adatkezelő EU Standard Contractual Clauses (SCC) szerződéseket írt alá az USA-s szolgáltatókkal (GDPR 46. cikk);</li>
+  <li>Tudomásul veszem, hogy jelen nyilatkozat elektronikus aláírásnak minősül az E-Sig tv. szerint, és időbélyeggel, IP-cím rögzítésével kerül dokumentálásra (bizonyító erővel polgári perben);</li>
+  <li>Kijelentem, hogy legalább 16 éves vagyok, vagy szülői/gondnoki hozzájárulásom van;</li>
+  <li>Beleegyezem a szükséges sütik használatába; amennyiben az elemzésre szolgáló sütikre hozzájárulást adtam, azok aktiválódnak.</li>
+</ul>
 
-<div class="szekció">Nyilatkozatot tevő adatai</div>
+<div class="szekció">Nyilatkozatot Tevő Adatai</div>
 <table>
-  <tr><td>Név:</td><td>${d.nev}</td></tr>
-  <tr><td>Születési hely, idő:</td><td>${d.szulhely}, ${d.szulido}</td></tr>
-  <tr><td>Lakcím / Székhely:</td><td>${d.lakcim}</td></tr>
-  <tr><td>E-mail cím:</td><td>${d.email}</td></tr>
-  <tr><td>Telefonszám:</td><td>${d.telefon}</td></tr>
-  ${d.cegnev ? `<tr><td>Cég / Gazdaság:</td><td>${d.cegnev}</td></tr>` : ''}
-  ${d.adoszam ? `<tr><td>Adószám:</td><td>${d.adoszam}</td></tr>` : ''}
-  ${d.szerepkor ? `<tr><td>Szerepkör:</td><td>${d.szerepkor}</td></tr>` : ''}
+  <tr><td>Név</td><td>${d.nev}</td></tr>
+  <tr><td>Születési hely</td><td>${d.szulhely}</td></tr>
+  <tr><td>Születési idő</td><td>${d.szulido}</td></tr>
+  <tr><td>Lakcím / Székhely</td><td>${d.lakcim}</td></tr>
+  <tr><td>E-mail cím</td><td>${d.email}</td></tr>
+  <tr><td>Telefonszám</td><td>${d.telefon}</td></tr>
+  ${d.cegnev ? `<tr><td>Cég / Gazdaság</td><td>${d.cegnev}</td></tr>` : ''}
+  ${d.adoszam ? `<tr><td>Adószám</td><td>${d.adoszam}</td></tr>` : ''}
+  ${d.szerepkor ? `<tr><td>Szerepkör</td><td>${d.szerepkor}</td></tr>` : ''}
 </table>
 
-<div class="szekció">Elektronikus rögzítés adatai</div>
+<div class="szekció">Elektronikus Rögzítés Adatai (Aláírás Azonosítása)</div>
 <table>
-  <tr><td>Elfogadás időpontja:</td><td>${datum} (Budapest)</td></tr>
-  <tr><td>Rögzítő IP-cím:</td><td>${ip}</td></tr>
-  <tr><td>Tájékoztató verziója:</td><td>2025/1</td></tr>
-  <tr><td>Elfogadás módja:</td><td>Online, elektronikus nyilatkozat</td></tr>
+  <tr><td>Elfogadás időpontja (Budapest)</td><td>${datum}</td></tr>
+  <tr><td>Rögzítő IP-cím</td><td>${ip}</td></tr>
+  <tr><td>Tájékoztató verziója</td><td>2025/2 – GDPR Teljes Megfelelés</td></tr>
+  <tr><td>Elfogadás módja</td><td>Online elektronikus nyilatkozat (E-Sig tv.)</td></tr>
+  <tr><td>Elemzésre szolgáló sütik</td><td>${d.cookie_analytics ? 'Elfogadva' : 'Nem elfogadva'}</td></tr>
 </table>
 
-<p class="megjegyzes">Jelen elektronikus nyilatkozat az adatkezelési tájékoztató elfogadásának bizonyítékaként szolgál. Az elfogadás időbélyeggel és IP-cím rögzítésével dokumentálásra került.</p>
+<p class="megjegyzes">
+  Jelen elektronikus nyilatkozat az Adatkezelési Tájékoztató (2025/2) elfogadásának bizonyítékaként szolgál. Az elfogadás időbélyeggel, IP-cím és user-agent rögzítésével dokumentálásra került az E-Sig tv. szerint, és polgári perben bizonyítékként használható. Az érintett az adatkezelőhöz fordulhat az alábbi jogok gyakorlásához: tájékoztatás, hozzáférés, helyesbítés, törlés, korlátozás, tiltakozás, adathordozhatóság, hozzájárulás visszavonása (30 napos válaszadási határidő).
+</p>
+
+
 
 <div class="labléc">
-  Kozák Dávid &nbsp;|&nbsp; 4400 Nyíregyháza, Ív utca 114. &nbsp;|&nbsp; kozakdavid@agrartanacsadas.com &nbsp;|&nbsp; Adószám: 55911742-2-35
+  Kozák Dávid &nbsp;|&nbsp; 4400 Nyíregyháza, Ív utca 114. &nbsp;|&nbsp; kozakdavid@agrartanacsadas.com &nbsp;|&nbsp; Adószám: 55911742-2-35<br>
+  Nyilatkozat verziója: 2025/2 &nbsp;|&nbsp; Elektronikus aláírás státusza: E-Sig tv. szerinti egyszerű elektronikus aláírás
 </div>
 </body></html>`;
 
