@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leiratkozás – Kozák Dávid Agrárszaktanácsadó</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,600;1,9..144,300&family=DM+Sans:wght@300;400;500&display=swap');
+
+    :root {
+      --zold:   #2d5a27;
+      --fold:   #8b6914;
+      --kremszin: #f7f3ec;
+      --szoveg: #1a1a18;
+      --halvany: #c8bfa8;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--kremszin);
+      color: var(--szoveg);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    .keret {
+      max-width: 480px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .logo-sor {
+      font-family: 'Fraunces', serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--fold);
+      margin-bottom: 2.5rem;
+      opacity: 0.8;
+    }
+
+    .ikon {
+      font-size: 3rem;
+      margin-bottom: 1.5rem;
+      display: block;
+    }
+
+    h1 {
+      font-family: 'Fraunces', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+      color: var(--szoveg);
+    }
+
+    .leiras {
+      font-size: 0.95rem;
+      line-height: 1.7;
+      color: #5a5a50;
+      margin-bottom: 2rem;
+    }
+
+    .allapot-doboz {
+      background: white;
+      border: 1px solid var(--halvany);
+      border-radius: 12px;
+      padding: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /* LOADING állapot */
+    .betoltes { display: block; }
+    .siker    { display: none; }
+    .hiba     { display: none; }
+    .mar-leiratkozott { display: none; }
+
+    .porgeto {
+      width: 40px;
+      height: 40px;
+      border: 3px solid var(--halvany);
+      border-top-color: var(--zold);
+      border-radius: 50%;
+      animation: forog 0.8s linear infinite;
+      margin: 0 auto 1rem;
+    }
+
+    @keyframes forog {
+      to { transform: rotate(360deg); }
+    }
+
+    .betoltes p { color: #7a7a6a; font-size: 0.9rem; }
+
+    /* SIKER állapot */
+    .siker-ikon {
+      width: 56px; height: 56px;
+      background: var(--zold);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .siker h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .siker p { color: #5a5a50; font-size: 0.9rem; line-height: 1.6; }
+
+    /* HIBA állapot */
+    .hiba-ikon {
+      width: 56px; height: 56px;
+      background: #c0392b;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 1rem;
+      font-size: 1.5rem;
+      color: white;
+    }
+
+    .hiba h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .hiba p { color: #5a5a50; font-size: 0.9rem; }
+
+    .email-link {
+      color: var(--zold);
+      text-decoration: none;
+      border-bottom: 1px solid var(--zold);
+    }
+
+    .email-link:hover { opacity: 0.7; }
+
+    .mar-leiratkozott h2 {
+      font-family: 'Fraunces', serif;
+      font-weight: 300;
+      font-size: 1.4rem;
+      margin-bottom: 0.5rem;
+    }
+    .mar-leiratkozott p { color: #5a5a50; font-size: 0.9rem; }
+
+    footer {
+      font-size: 0.75rem;
+      color: var(--halvany);
+      text-align: center;
+      margin-top: 1rem;
+    }
+
+    footer a { color: var(--halvany); }
+  </style>
+</head>
+<body>
+
+<div class="keret">
+  <div class="logo-sor">Kozák Dávid · Agrárszaktanácsadó</div>
+
+  <div class="allapot-doboz" id="doboz">
+
+    <!-- BETÖLTÉS -->
+    <div class="betoltes" id="allapot-betoltes">
+      <div class="porgeto"></div>
+      <p>Leiratkozás feldolgozása...</p>
+    </div>
+
+    <!-- SIKER -->
+    <div class="siker" id="allapot-siker">
+      <div class="siker-ikon">✓</div>
+      <h2>Sikeresen leiratkozott</h2>
+      <p>A <strong id="email-megjelenitese"></strong> e-mail cím eltávolítva a levelezési listáról.<br>
+      Több hírlevelet nem küldünk erre a címre.</p>
+    </div>
+
+    <!-- MÁR LEIRATKOZOTT -->
+    <div class="mar-leiratkozott" id="allapot-mar-leiratkozott">
+      <span style="font-size:2rem; display:block; margin-bottom:0.75rem;">📭</span>
+      <h2>Már leiratkozott</h2>
+      <p>Ez az e-mail cím korábban már le lett iratkozva a levelezési listáról.</p>
+    </div>
+
+    <!-- HIBA -->
+    <div class="hiba" id="allapot-hiba">
+      <div class="hiba-ikon">✕</div>
+      <h2>Érvénytelen link</h2>
+      <p>Ez a leiratkozási link nem érvényes vagy már lejárt.<br>
+      Problémás esetén keressen meg: <a class="email-link" href="mailto:kozak.david@nak.hu">kozak.david@nak.hu</a></p>
+    </div>
+
+  </div>
+
+  <footer>
+    &copy; 2026 Kozák Dávid Agrárszaktanácsadó · NAK-1963<br>
+    Nyíregyháza · <a href="mailto:kozak.david@nak.hu">kozak.david@nak.hu</a>
+  </footer>
+</div>
+
+<script>
+  // =============================================
+  // KONFIGURÁCIÓ – töltsd ki a saját adataiddal!
+  // =============================================
+  const SUPABASE_URL     = 'https://gkhahwxbwdmdayzaytzi.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImdraGFod3hid2RtZGF5emF5dHppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMxMzE5NTgsImV4cCI6MjA4ODcwNzk1OH0.Cmng39afH9wf9Gs3SKJmCzg0JDnThBYf289xb83LzxE'; // Settings → API → anon key
+
+  // =============================================
+
+  function allapotValt(melyik) {
+    document.querySelectorAll('.betoltes, .siker, .hiba, .mar-leiratkozott')
+      .forEach(el => el.style.display = 'none');
+    document.getElementById('allapot-' + melyik).style.display = 'block';
+  }
+
+  async function leiratkozas() {
+    const params = new URLSearchParams(window.location.search);
+    const token  = params.get('token');
+
+    if (!token) {
+      allapotValt('hiba');
+      return;
+    }
+
+    try {
+      // 1. Token alapján megkeressük a feliratkozót
+      const keresRes = await fetch(
+        `${SUPABASE_URL}/rest/v1/korlevel_feliratkozok?leiratkozas_token=eq.${encodeURIComponent(token)}&select=id,email,aktiv`,
+        {
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`
+          }
+        }
+      );
+
+      const adatok = await keresRes.json();
+
+      if (!adatok || adatok.length === 0) {
+        allapotValt('hiba');
+        return;
+      }
+
+      const feliratkozo = adatok[0];
+
+      // 2. Már korábban leiratkozott?
+      if (!feliratkozo.aktiv) {
+        allapotValt('mar-leiratkozott');
+        return;
+      }
+
+      // 3. Leiratkozás végrehajtása
+      const frissRes = await fetch(
+        `${SUPABASE_URL}/rest/v1/korlevel_feliratkozok?id=eq.${feliratkozo.id}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            aktiv: false,
+            leiratkozva: new Date().toISOString()
+          })
+        }
+      );
+
+      if (frissRes.ok) {
+        document.getElementById('email-megjelenitese').textContent = feliratkozo.email;
+        allapotValt('siker');
+      } else {
+        allapotValt('hiba');
+      }
+
+    } catch (err) {
+      console.error('Hiba:', err);
+      allapotValt('hiba');
+    }
+  }
+
+  leiratkozas();
+</script>
+
+</body>
+</html>
